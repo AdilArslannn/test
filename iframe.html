@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Child Frame</title>
+</head>
+<body>
+    <h1>Child Frame</h1>
+    <p>This is the child frame from origin 2.</p>
+    
+    <button onclick="runTest()">Run Cross-Origin Test</button>
+    <div id="results"></div>
+
+    <script>
+        function runTest() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<h3>Test Results:</h3>';
+            
+            // Method 1: Assigning to a variable
+            try {
+                const parentHref = window.parent.location.href;
+                results.innerHTML += '<p>✅ Method 1 (Assignment): Success - ' + parentHref + '</p>';
+            } catch (error) {
+                results.innerHTML += '<p>❌ Method 1 (Assignment): Failed - ' + error.message + '</p>';
+            }
+            
+            // Method 2: Directly accessing without assignment
+            try {
+                window.parent.location.href;
+                results.innerHTML += '<p>✅ Method 2 (Direct Access): Success</p>';
+            } catch (error) {
+                results.innerHTML += '<p>❌ Method 2 (Direct Access): Failed - ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
